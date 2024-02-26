@@ -1,10 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:meme_generator/models/image_button_model.dart';
+import 'package:meme_generator/models/image_model.dart';
+import 'package:meme_generator/models/meme_model.dart';
 import 'package:meme_generator/screen/meme_generator_screen.dart';
+import 'package:provider/provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
-  runApp(const MyApp());
+  runApp(MultiProvider(providers: [
+    ChangeNotifierProvider(
+      create: (_) => MemeModel(),
+    ),
+    ChangeNotifierProvider(
+      create: (_) => ImageModel(),
+    ),
+    ChangeNotifierProvider(
+      create: (_) => ImageButtonModel(),
+    ),
+  ], child: const MyApp()));
 }
 
 /// App,s main widget.
@@ -16,10 +29,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepOrange),
         useMaterial3: true,
       ),
-      home: const MemeGeneratorScreen(),
+      home: const MemeGeneratorDemotivator(),
     );
   }
 }
